@@ -32,7 +32,7 @@ typedef enum : NSUInteger {
     STHTTPRequestCookiesStorageUndefined = NSUIntegerMax
 } STHTTPRequestCookiesStorage;
 
-@interface STHTTPRequest : NSObject <NSURLConnectionDelegate>
+@interface STHTTPRequest : NSObject <NSURLConnectionDelegate, NSURLSessionDataDelegate>
 
 @property (copy) uploadProgressBlock_t uploadProgressBlock;
 @property (copy) downloadProgressBlock_t downloadProgressBlock;

@@ -384,10 +384,10 @@ BOOL WaitFor(BOOL (^block)(void))
     
     XCTAssertTrue(WaitFor(^BOOL { return body || error; }), @"async URL loading failed");
     XCTAssertNil(error, @"error");
-    
+
     // session cookie should be set
     XCTAssertEqual([[r sessionCookies] count], 1);
-    
+
     // but shared cookies should be empty
     NSURL *url = [NSURL URLWithString:@"http://httpbin.org"];
     NSArray *cookiesFromSharedCookieStorage = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:url];

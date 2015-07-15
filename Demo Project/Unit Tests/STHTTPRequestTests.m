@@ -99,7 +99,7 @@
     
     NSDictionary *d = @{@"a":@"1", @"c":@"1"};
     
-    NSString *s2 = [s st_stringByAppendingGETParameters:d];
+    NSString *s2 = [s st_stringByAppendingGETParameters:d doApplyURLEncoding:YES];
     
     XCTAssertTrue(s2, @"http://www.test.com/x?b=1&a=1&c=1");
 }
