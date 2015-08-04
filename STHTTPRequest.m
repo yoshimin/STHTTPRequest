@@ -854,7 +854,7 @@ static STHTTPRequestCookiesStorage globalCookiesStoragePolicy = STHTTPRequestCoo
                                          code:0
                                      userInfo:userInfo];
         
-        self.errorBlock(self.error);
+        self.errorBlock(self.error, nil);
     }
 }
 
@@ -899,7 +899,7 @@ static STHTTPRequestCookiesStorage globalCookiesStoragePolicy = STHTTPRequestCoo
                                      code:kSTHTTPRequestCancellationError
                                  userInfo:userInfo];
     
-    self.errorBlock(self.error);
+    self.errorBlock(self.error, nil);
 }
 
 #pragma mark NSURLConnectionDataDelegate
@@ -964,10 +964,12 @@ static STHTTPRequestCookiesStorage globalCookiesStoragePolicy = STHTTPRequestCoo
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *responseString = [self stringWithData:self.responseData encodingName:self.responseStringEncodingName];
+        
         if(self.responseStatus >= 400) {
             NSDictionary *userInfo = [[self class] userInfoWithErrorDescriptionForHTTPStatus:self.responseStatus];
             self.error = [NSError errorWithDomain:NSStringFromClass([self class]) code:self.responseStatus userInfo:userInfo];
-            self.errorBlock(self.error);
+            self.errorBlock(self.error, responseString);
             return;
         }
         
@@ -976,7 +978,6 @@ static STHTTPRequestCookiesStorage globalCookiesStoragePolicy = STHTTPRequestCoo
         }
         
         if(self.completionBlock) {
-            NSString *responseString = [self stringWithData:self.responseData encodingName:self.responseStringEncodingName];
             self.completionBlock(self.responseHeaders, responseString);
         }
     });
@@ -985,7 +986,7 @@ static STHTTPRequestCookiesStorage globalCookiesStoragePolicy = STHTTPRequestCoo
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)e {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.error = e;
-        self.errorBlock(self.error);
+        self.errorBlock(self.error, self.responseString);
     });
 }
 

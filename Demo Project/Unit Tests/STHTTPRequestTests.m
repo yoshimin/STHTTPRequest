@@ -61,7 +61,7 @@
         // use response
     };
 
-    r.errorBlock = ^(NSError *error) {
+    r.errorBlock = ^(NSError *error, NSString *body) {
         // use error
     };
 
@@ -81,7 +81,7 @@
         NSLog(@"-- %@", data);
     };
     
-    r.errorBlock = ^(NSError *error) {
+    r.errorBlock = ^(NSError *error, NSString *body) {
         // use error
     };
     

@@ -23,7 +23,7 @@ typedef void (^uploadProgressBlock_t)(NSInteger bytesWritten, NSInteger totalByt
 typedef void (^downloadProgressBlock_t)(NSData *data, NSUInteger totalBytesReceived, long long totalBytesExpectedToReceive);
 typedef void (^completionBlock_t)(NSDictionary *headers, NSString *body);
 typedef void (^completionDataBlock_t)(NSDictionary *headers, NSData *body);
-typedef void (^errorBlock_t)(NSError *error);
+typedef void (^errorBlock_t)(NSError *error, NSString *body);
 
 typedef enum : NSUInteger {
     STHTTPRequestCookiesStorageShared = 0,

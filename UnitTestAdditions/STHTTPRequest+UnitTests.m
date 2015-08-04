@@ -57,7 +57,7 @@ void Swizzle(Class c, SEL orig, SEL new) {
             self.completionDataBlock(self.responseHeaders, self.responseData);
         }
     } else {
-        self.errorBlock(self.error);
+        self.errorBlock(self.error, nil);
     }
 }
 

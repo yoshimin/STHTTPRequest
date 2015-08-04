@@ -36,7 +36,7 @@
         [_activityIndicator stopAnimating];
     };
     
-    r.errorBlock = ^(NSError *error) {
+    r.errorBlock = ^(NSError *error, NSString *body) {
         _statusLabel.text = [error localizedDescription];
         
         NSLog(@"-- isCancellationError: %d", [error st_isCancellationError]);
