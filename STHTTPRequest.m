@@ -544,6 +544,8 @@ static STHTTPRequestCookiesStorage globalCookiesStoragePolicy = STHTTPRequestCoo
     
     request.HTTPShouldHandleCookies = ([self cookieStoragePolicy] == STHTTPRequestCookiesStorageShared);
     
+    [NSURLProtocol setProperty:request.HTTPBody forKey:@"HTTPBody" inRequest:request];
+    
     return request;
 }
 
