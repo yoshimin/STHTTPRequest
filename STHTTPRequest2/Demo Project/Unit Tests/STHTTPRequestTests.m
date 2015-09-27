@@ -63,7 +63,7 @@
         // use response
     };
 
-    r.errorBlock = ^(NSError *error, NSString *body) {
+    r.errorBlock = ^(NSError *error) {
         // use error
     };
 
@@ -79,11 +79,11 @@
     
     STHTTPRequest *r = [STHTTPRequest requestWithURLString:@"http://www.google.com"];
     
-    r.downloadProgressBlock = ^(NSData *data, NSUInteger totalBytesReceived, long long totalBytesExpectedToReceive) {
+    r.downloadProgressBlock = ^(NSData *data, int64_t totalBytesReceived, int64_t totalBytesExpectedToReceive) {
         NSLog(@"-- %@", data);
     };
     
-    r.errorBlock = ^(NSError *error, NSString *body) {
+    r.errorBlock = ^(NSError *error) {
         // use error
     };
     
